@@ -1,11 +1,13 @@
-/.gradle/
-/.idea/
+POC/.gradle/
+POC/.idea/
+POC/build/
+/build/
 out/
 gradlew
 *.bat
 *.iml
 *.class
-build/
+
 classes/
 
 
