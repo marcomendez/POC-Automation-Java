@@ -7,7 +7,7 @@ Feature: Era Login
     And I click Login on Login
     Then I should see 'View' displayed on Home
 
-  @ORPHAN
+  @PJ-1 @OPEN
   Scenario: Test
     Given I navigate to ClickUp
     Given I navigate to ClickUp
