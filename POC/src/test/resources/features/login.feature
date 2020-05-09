@@ -9,5 +9,9 @@ Feature: Era Login
 
   @ORPHAN
   Scenario: Test
-    Given I navigate to ClickUp 
     Given I navigate to ClickUp
+    Given I navigate to ClickUp
+
+  @ORPHAN
+  Scenario: Test Test
+    Then I should see 'View' displayed on Home
