@@ -6,3 +6,7 @@ Feature: Era Login
     And I set '1234Qwert' in Password on Login
     And I click Login on Login
     Then I should see 'View' displayed on Home
+
+  @ORPHAN
+  Scenario: Test
+    Given Given Given I navigate to ClickUp
