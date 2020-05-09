@@ -9,4 +9,5 @@ Feature: Era Login
 
   @ORPHAN
   Scenario: Test
-    Given Given Given I navigate to ClickUp
+    Given Given I navigate to ClickUp 
+    Given I navigate to ClickUp
