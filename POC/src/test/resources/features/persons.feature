@@ -1,1 +1,1 @@
-Feature: Persones
+Feature: Persos
