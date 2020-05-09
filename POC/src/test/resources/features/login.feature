@@ -1,4 +1,4 @@
-Feature: Logins
+Feature: Era Login
 
   Scenario: Login testing
     Given I navigate to ClickUp
