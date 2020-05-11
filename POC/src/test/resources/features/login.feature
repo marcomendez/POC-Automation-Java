@@ -1,5 +1,6 @@
 Feature: Era Login
 
+  @PJ-3 @OPEN
   Scenario: Login testing
     Given I navigate to ClickUp
     When I set 'hajoleb949@riv3r.net' in UserName on Login
