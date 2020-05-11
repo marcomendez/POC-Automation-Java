@@ -1,5 +1,5 @@
 Feature: Test123
 
-  @ORPHAN
+  @PJ-2 @OPEN
   Scenario: Test
     Given I click
