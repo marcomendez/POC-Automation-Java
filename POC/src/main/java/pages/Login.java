@@ -14,9 +14,9 @@ public class Login extends BasePage {
     private static final Map<String, By> Locator;
     static {
         Map<String, By> myLocators = new HashMap<String, By>();
-        myLocators.put("UserName", By.id("email-input"));
-        myLocators.put("Password", By.id("password-input"));
-        myLocators.put("Login", By.id("login-submit"));
+        myLocators.put("UserName", By.id("email"));
+        myLocators.put("Password", By.id("passwd"));
+        myLocators.put("Sign In", By.id("SubmitLogin"));
 
         Locator = myLocators;
     }

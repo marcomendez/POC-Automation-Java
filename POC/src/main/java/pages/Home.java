@@ -14,8 +14,7 @@ public class Home extends  BasePage {
     private static final Map<String, By> Locator;
     static {
         Map<String, By> myLocators = new HashMap<String, By>();
-        myLocators.put("View", By.xpath("//*[@class='cu-data-view-list__add-text']"));
-        myLocators.put("Plus", By.xpath("//*[@class='cu2-project-list-bar__add-icon icon']"));
+        myLocators.put("My Personal Information", By.cssSelector("#center_column > div > div:nth-child(1) > ul > li:nth-child(4) > a"));
 
         Locator = myLocators;
     }

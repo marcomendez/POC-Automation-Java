@@ -3,14 +3,18 @@ package steps;
 import core.WebDriverManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import utils.MergeJson;
+
+import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
 public class GenericSteps extends  BaseStep{
 
-    @Given("^I navigate to ClickUp$")
+    @Given("^I navigate to Login Page")
     public void NavigateToPage()  {
-        WebDriverManager.getInstance().getWebDriver().get("https://app.clickup.com/login");
+        WebDriverManager.getInstance().getWebDriver().get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+
     }
 
     @And("^I set '([^']+?)' in ([^']+?)(?: on ([^']+?)|)$")

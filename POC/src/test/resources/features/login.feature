@@ -1,18 +1,22 @@
-Feature: Era Login
+@smoke
+Feature: Login
 
-  @PJ-3 @OPEN
+
   Scenario: Login testing
-    Given I navigate to ClickUp
-    When I set 'hajoleb949@riv3r.net' in UserName on Login
-    And I set '1234Qwert' in Password on Login
-    And I click Login on Login
-    Then I should see 'View' displayed on Home
+    Given I navigate to Login Page
+    When I set 'marco@test.com' in UserName on Login
+    And I set 'hola123' in Password on Login
+    Then I should see 'Sign In' displayed on Login
 
-  @PJ-1 @PJ-3 @OPEN
-  Scenario: Test
-    Given I navigate to ClickUp
-    Given I navigate to ClickUp
 
-  @ORPHAN
-  Scenario: Test Test
-    Then I should see 'View' displayed on Home
+
+  Scenario: Login testing2
+    Given I navigate to Login Page
+    When I set 'marco@teeeeeeeeeeeeeeeeeeest.com' in UserName on Login
+
+
+
+  Scenario: Login testing3
+    Given I navigate to Login Page
+    When I set 'marco@test.com' in UserName on Login
+
