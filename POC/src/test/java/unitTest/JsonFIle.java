@@ -10,7 +10,7 @@ public class JsonFIle {
     @Test
     public void testAddPass() throws IOException {
         MergeJson mergeJson = new MergeJson();
-        MergeJson.Merge(mergeJson);
+        mergeJson.Merge();
     }
 
 }

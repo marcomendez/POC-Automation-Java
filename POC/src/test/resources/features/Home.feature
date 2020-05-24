@@ -1,4 +1,4 @@
-@home
+@smoke
 Feature: Home
 
   Scenario: Login testing

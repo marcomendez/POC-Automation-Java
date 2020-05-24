@@ -1,3 +1,5 @@
+
+
 plugins {
     id 'java'
 }
@@ -26,23 +28,53 @@ dependencies {
 }
 
 
-task executeFeatures(type: Test) {
+task Run(type: Test) {
+    useTestNG()
     options {
-        jvmArgs = ['-Dcucumber.options= ' +
+        useDefaultListeners = false
+        jvmArgs = ['-Dcucumber.options=@/src/test/resources/features/Home.feature ' +
                            '--glue steps ' +
                            '--plugin pretty ' +
                            '--plugin json:build/cucumber/cucumber.json ' +
                            '--plugin rerun:build/cucumber/rerun.txt ' +
-                           'features:' + featureFolders + ' ' +
+                           'classpath:' + featureFolders + ' ' +
                            cucumberOptions]
     }
-
     doLast {
-        println 'Done!!!!!!!!!!!'
+        println("Run Executed!")
+    }
+}
+
+task Retry(type: Test) {
+    useTestNG()
+    File rerunFile = new File('build/cucumber/rerun.txt')
+    if (rerunFile.exists() && !rerunFile.getText().isEmpty()) {
+        options {
+            useDefaultListeners = false
+            jvmArgs = ['-Dcucumber.options=@build/cucumber/rerun.txt ' +
+                               '--glue steps ' +
+                               '--plugin pretty ' +
+                               '--plugin json:build/cucumber/retry/cucumber.json ' +
+                               '--plugin rerun:build/cucumber/retry/rerun.txt ']
+        }
+    }
+    doLast {
+        File rerunCucumberJson = new File('build/cucumber/retry/cucumber.json')
+        if (rerunCucumberJson.exists()) {
+            println("Json updated")
+        }
     }
 }
 
 
-test {
-    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+
+task executeTests(type: Test) {
+    useTestNG()
+    options {
+        jvmArgs = ['-Dcucumber.execution.strict=' + true]
+        jvmArgs = ['-Dcucumber.filter.tags=' + filterTags]
+    }
+    testLogging.showStandardStreams = true
+    scanForTestClasses = false
 }
+

@@ -9,59 +9,62 @@ import java.io.*;
 
 public class MergeJson {
 
+    private static final String Name = "name";
+    private static final String Elements = "elements";
+
+
     private JsonArray LoadJson(String jsonPath) throws FileNotFoundException {
         JsonParser parser = new JsonParser();
         FileReader jsonFile = new FileReader(jsonPath);
         return (JsonArray) parser.parse(jsonFile);
     }
 
-    public static void Merge(MergeJson mergeJsonaa) throws IOException {
+    public void Merge() throws IOException {
         // Load Cucumber.json Files.
-        JsonArray cucumberJson = mergeJsonaa.LoadJson("build/cucumber/cucumber.json");
-        JsonArray cucumberJsonRetry = mergeJsonaa.LoadJson("build/cucumber/retry/cucumber.json");
+        JsonArray cucumberJson = LoadJson("build/cucumber/cucumber.json");
+        JsonArray cucumberJsonRetry = LoadJson("build/cucumber/retry/cucumber.json");
 
         //Instance new Json cucumber aux.
         JsonArray newCucumberJson = new JsonArray();
-        JsonArray newCucumberScenariosArray = new JsonArray();
 
         // Iterate  features
-        for (int i = 0; i < cucumberJson.size(); i++) {
-            JsonObject featureJson = (JsonObject) cucumberJson.get(i);
+        for (int indexCucumberJson = 0; indexCucumberJson < cucumberJson.size(); indexCucumberJson++) {
+            JsonObject featureJson = (JsonObject) cucumberJson.get(indexCucumberJson);
 
-            // Iterate re-executed features
-            for (int x = 0; x < cucumberJsonRetry.size(); x++) {
-                JsonObject retryFeatureJson = (JsonObject) cucumberJsonRetry.get(x);
-                newCucumberScenariosArray = new JsonArray();
+            // Iterate rety features
+            for (int indexCucumberJsonRetry = 0; indexCucumberJsonRetry < cucumberJsonRetry.size(); indexCucumberJsonRetry++) {
+                JsonObject retryFeatureJson = (JsonObject) cucumberJsonRetry.get(indexCucumberJsonRetry);
+                JsonArray newCucumberScenariosArray = new JsonArray();
 
-                if (featureJson.get("name").equals(retryFeatureJson.get("name"))) {
+                if (featureJson.get(Name).equals(retryFeatureJson.get(Name))) {
 
                     // Iterate scenarios
-                    JsonArray scenariosJson = featureJson.getAsJsonArray("elements");
+                    JsonArray scenariosJson = featureJson.getAsJsonArray(Elements);
 
-                    for (int j = 0; j < scenariosJson.size(); j++) {
-                        JsonObject scenarioJson = scenariosJson.get(j).getAsJsonObject();
+                    for (int i = 0; i < scenariosJson.size(); i++) {
+                        JsonObject scenarioJson = scenariosJson.get(i).getAsJsonObject();
 
-                        // Iterate re-executed scenarios
-                        JsonArray scenariosRetryJson = retryFeatureJson.getAsJsonArray("elements");
+                        // Iterate retry scenarios
+                        JsonArray scenariosRetryJson = retryFeatureJson.getAsJsonArray(Elements);
 
-                        for (int l = 0; l < scenariosRetryJson.size(); l++) {
-                            JsonObject scenarioRetryJson = scenariosRetryJson.get(l).getAsJsonObject();
+                        for (int x = 0; x < scenariosRetryJson.size(); x++) {
+                            JsonObject scenarioRetryJson = scenariosRetryJson.get(x).getAsJsonObject();
 
-                            if (scenarioJson.get("name").equals(scenarioRetryJson.get("name"))) {
+                            if (scenarioJson.get(Name).equals(scenarioRetryJson.get(Name))) {
                                 // Add re-executed scenario
                                 newCucumberScenariosArray.add(scenarioRetryJson);
                                 break;
-                            } else if (l == scenariosRetryJson.size() - 1) {
+                            } else if (x == scenariosRetryJson.size() - 1) {
                                 newCucumberScenariosArray.add(scenarioJson);
                             }
                         }
                     }
 
-                    // Add re-executed feature
-                    featureJson.add("elements", newCucumberScenariosArray);
+                    // Add retry feature
+                    featureJson.add(Elements, newCucumberScenariosArray);
                     newCucumberJson.add(featureJson);
                     break;
-                } else if(x == cucumberJsonRetry.size() - 1) {
+                } else if(indexCucumberJsonRetry == cucumberJsonRetry.size() - 1) {
                     newCucumberJson.add(featureJson);
                 }
             }
@@ -69,15 +72,13 @@ public class MergeJson {
 
         // Override cucumber json
         JsonElement newCucumberJsonAux = (JsonElement) newCucumberJson;
-        mergeJsonaa.writeCucumberMergedJsonFile(newCucumberJsonAux.getAsJsonArray().toString());
+        writeCucumberMergedJsonFile(newCucumberJsonAux.getAsJsonArray().toString());
 
     }
 
 
-
     public  void writeCucumberMergedJsonFile(String jsonString) throws IOException {
-        File folder = new File("build/cucumber/merged/");
-        folder.mkdirs();
+        new File("build/cucumber/merged/").mkdirs();
         FileWriter writerCucumberJson = new FileWriter("build/cucumber/merged/cucumber.json");
         writerCucumberJson.write(jsonString);
         writerCucumberJson.close();
