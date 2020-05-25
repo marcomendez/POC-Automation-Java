@@ -6,22 +6,21 @@ import com.google.gson.JsonParser;
 
 import java.io.*;
 
-public class MergeJson {
+public class JsonHelper {
 
     private static final String Name = "name";
     private static final String Elements = "elements";
 
-
-    private JsonArray LoadJson(String jsonPath) throws FileNotFoundException {
+    private JsonArray loadJson(String jsonPath) throws FileNotFoundException {
         JsonParser parser = new JsonParser();
         FileReader jsonFile = new FileReader(jsonPath);
         return (JsonArray) parser.parse(jsonFile);
     }
 
-    public void Merge(String cucumberFile, String retriedCucumberFile, String newCucumberFile) throws IOException {
+    public void doMerge(String cucumberFile, String retriedCucumberFile, String newCucumberFile) throws IOException {
         // Load Cucumber.json Files.
-        JsonArray cucumberJson = LoadJson(cucumberFile);
-        JsonArray cucumberJsonRetry = LoadJson(retriedCucumberFile);
+        JsonArray cucumberJson = loadJson(cucumberFile);
+        JsonArray cucumberJsonRetry = loadJson(retriedCucumberFile);
 
         //Instance new Json cucumber.
         JsonArray newCucumberJson = new JsonArray();
@@ -70,12 +69,11 @@ public class MergeJson {
 
         // Create cucumber json Merged.
         JsonElement newCucumberJsonAux = (JsonElement) newCucumberJson;
-        CreateNewCucumberJson(newCucumberJsonAux.getAsJsonArray().toString(), newCucumberFile);
+        createNewCucumberJson(newCucumberJsonAux.getAsJsonArray().toString(), newCucumberFile);
 
     }
 
-
-    public  void CreateNewCucumberJson(String jsonString, String newCucumberFile) throws IOException {
+    public  void createNewCucumberJson(String jsonString, String newCucumberFile) throws IOException {
         FileWriter writerCucumberJson = new FileWriter(newCucumberFile);
         writerCucumberJson.write(jsonString);
         writerCucumberJson.close();

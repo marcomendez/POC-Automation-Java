@@ -3,9 +3,6 @@ package steps;
 import core.WebDriverManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import utils.MergeJson;
-
-import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
 
