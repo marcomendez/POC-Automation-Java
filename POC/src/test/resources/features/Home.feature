@@ -7,5 +7,6 @@ Feature: Home
     And I set 'hola123' in Password on Login
     And I click Sign In on Login
     Then I should see 'My Personal Information' displayed on Home
+    And I click Sign out on Home
 
 

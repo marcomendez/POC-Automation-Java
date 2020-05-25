@@ -15,7 +15,7 @@ public class Home extends  BasePage {
     static {
         Map<String, By> myLocators = new HashMap<String, By>();
         myLocators.put("My Personal Information", By.cssSelector("#center_column > div > div:nth-child(1) > ul > li:nth-child(4) > a"));
-
+        myLocators.put("Sign out", By.cssSelector("#header > div.nav > div > div > nav > div:nth-child(2) > a"));
         Locator = myLocators;
     }
 }

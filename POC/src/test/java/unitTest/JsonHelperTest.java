@@ -29,7 +29,7 @@ public class JsonHelperTest {
         List<FeatureClass> myCucumberRetryJsonList = new Gson().fromJson((JsonArray) parser.parse(cucumberMerged) , new TypeToken<ArrayList<FeatureClass>>(){}.getType());
 
         Assert.assertEquals(myCucumberJsonList.size(), myCucumberRetryJsonList.size());
-        for (int i = 0; i<myCucumberJsonList.size() ; i++) {
+        for (int i = 0; i < myCucumberJsonList.size() ; i++) {
             Assert.assertEquals(myCucumberJsonList.get(i).line, myCucumberRetryJsonList.get(i).line);
             Assert.assertEquals(myCucumberJsonList.get(i).scenarios.size(), myCucumberRetryJsonList.get(i).scenarios.size());
             Assert.assertEquals(myCucumberJsonList.get(i).name, myCucumberRetryJsonList.get(i).name);
