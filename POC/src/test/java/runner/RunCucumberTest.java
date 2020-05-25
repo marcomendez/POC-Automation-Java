@@ -8,23 +8,21 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
 
-
-
+/*
 @CucumberOptions(
         features = "@build/cucumber/rerun.txt",
         glue = {"steps"},
         plugin = {"pretty", "json:build/cucumber/retry/cucumber.json", "rerun:build/cucumber/retry/rerun.txt",
         }
-)
+)*/
 
-/*
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"steps"},
-        tags = "@smoke",
+        tags = "@Marco",
         plugin = {"pretty", "json:build/cucumber/cucumber.json", "rerun:build/cucumber/rerun.txt",}
 )
-*/
+
 public class RunCucumberTest extends AbstractTestNGCucumberTests {
 
     @BeforeTest

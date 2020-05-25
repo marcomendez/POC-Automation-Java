@@ -6,7 +6,6 @@ import com.google.gson.JsonParser;
 
 import java.io.*;
 
-
 public class MergeJson {
 
     private static final String Name = "name";
@@ -19,12 +18,12 @@ public class MergeJson {
         return (JsonArray) parser.parse(jsonFile);
     }
 
-    public void Merge() throws IOException {
+    public void Merge(String cucumberFile, String retriedCucumberFile, String newCucumberFile) throws IOException {
         // Load Cucumber.json Files.
-        JsonArray cucumberJson = LoadJson("build/cucumber/cucumber.json");
-        JsonArray cucumberJsonRetry = LoadJson("build/cucumber/retry/cucumber.json");
+        JsonArray cucumberJson = LoadJson(cucumberFile);
+        JsonArray cucumberJsonRetry = LoadJson(retriedCucumberFile);
 
-        //Instance new Json cucumber aux.
+        //Instance new Json cucumber.
         JsonArray newCucumberJson = new JsonArray();
 
         // Iterate  features
@@ -51,7 +50,6 @@ public class MergeJson {
                             JsonObject scenarioRetryJson = scenariosRetryJson.get(x).getAsJsonObject();
 
                             if (scenarioJson.get(Name).equals(scenarioRetryJson.get(Name))) {
-                                // Add re-executed scenario
                                 newCucumberScenariosArray.add(scenarioRetryJson);
                                 break;
                             } else if (x == scenariosRetryJson.size() - 1) {
@@ -70,16 +68,15 @@ public class MergeJson {
             }
         }
 
-        // Override cucumber json
+        // Create cucumber json Merged.
         JsonElement newCucumberJsonAux = (JsonElement) newCucumberJson;
-        writeCucumberMergedJsonFile(newCucumberJsonAux.getAsJsonArray().toString());
+        CreateNewCucumberJson(newCucumberJsonAux.getAsJsonArray().toString(), newCucumberFile);
 
     }
 
 
-    public  void writeCucumberMergedJsonFile(String jsonString) throws IOException {
-        new File("build/cucumber/merged/").mkdirs();
-        FileWriter writerCucumberJson = new FileWriter("build/cucumber/merged/cucumber.json");
+    public  void CreateNewCucumberJson(String jsonString, String newCucumberFile) throws IOException {
+        FileWriter writerCucumberJson = new FileWriter(newCucumberFile);
         writerCucumberJson.write(jsonString);
         writerCucumberJson.close();
     }
