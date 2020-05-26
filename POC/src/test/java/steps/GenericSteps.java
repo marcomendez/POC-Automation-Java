@@ -4,6 +4,8 @@ import core.WebDriverManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 
+import java.util.Map;
+
 import static org.testng.Assert.assertTrue;
 
 public class GenericSteps extends  BaseStep{
@@ -28,5 +30,10 @@ public class GenericSteps extends  BaseStep{
     public void VerifyFieldOnPage(final String elementName, final String pageName) {
         boolean isDisplayed =  GetElement(elementName, pageName).isDisplayed();
         assertTrue(isDisplayed);
+    }
+
+    @And("I set with table")
+    public void iSetTheProjectForm(Map<String, String> data) {
+
     }
 }
