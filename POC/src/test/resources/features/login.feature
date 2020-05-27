@@ -1,7 +1,6 @@
 @smoke
 Feature: Login
 
-
   Scenario: Login testing 2
     Given I navigate to Login Page
     When I set 'AaaaAAAAAAAAAAAAAAAAAAAAAAA' in UserName on Login
@@ -10,7 +9,7 @@ Feature: Login
 
   Scenario: Login testing 3
   Given I navigate to Login Page
-  When I set 'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB' in UserName on Login
+  When I set 'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB' in UserName1 on Login
   And I set 'hola123' in Password on Login
   And I set with table
     |item   | value  |

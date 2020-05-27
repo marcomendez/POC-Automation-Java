@@ -16,18 +16,23 @@ import java.util.List;
 
 public class JsonHelperTest {
 
-    @Test
+
     public void testVerifyBasicFields() throws IOException {
+
+        // do to merge
         JsonHelper jsonHelper = new JsonHelper();
         jsonHelper.doMerge("build/cucumber/msdca.json", "build/cucumber/AKT_run_1.json", "build/cucumber/cucumberMerged.json");
 
-       JsonParser parser = new JsonParser();
+        // read Jsons
+        JsonParser parser = new JsonParser();
         FileReader cucumberJson = new FileReader("build/cucumber/msdca.json");
         FileReader cucumberMerged = new FileReader("build/cucumber/cucumberMerged.json");
 
+        // load jsons
         List<FeatureClass> myCucumberJsonList = new Gson().fromJson((JsonArray) parser.parse(cucumberJson) , new TypeToken<ArrayList<FeatureClass>>(){}.getType());
         List<FeatureClass> myCucumberMergedList = new Gson().fromJson((JsonArray) parser.parse(cucumberMerged) , new TypeToken<ArrayList<FeatureClass>>(){}.getType());
 
+        // validations
         Assert.assertEquals(myCucumberJsonList.size(), myCucumberMergedList.size());
         for (int i = 0; i < myCucumberJsonList.size() ; i++) {
             Assert.assertEquals(myCucumberJsonList.get(i).line, myCucumberMergedList.get(i).line);
