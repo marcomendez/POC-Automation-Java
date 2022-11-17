@@ -5,12 +5,12 @@ import pages.IPage;
 
 public class BaseStep {
 
-     public WebElement GetElement (String elementName, String pageHome)  {
+     public WebElement GetElement (String elementName, String pageName)  {
 
          IPage page = null;
 
          try {
-             page = (IPage) Class.forName("pages." + pageHome).newInstance();
+             page = (IPage) Class.forName("pages." + pageName).newInstance();
 
          } catch (Exception e) {
              e.printStackTrace();
